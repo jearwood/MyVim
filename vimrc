@@ -49,6 +49,7 @@ set ruler
 set number
 set list
 set listchars=tab:\|·,eol:$,trail:·,extends:>,precedes:<
+nmap <silent> <Leader>l :set list!<CR>
 
 " Insert the current branch from fugitive onto the statusline
 set statusline=%<%f\ %{fugitive#statusline()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
@@ -84,9 +85,24 @@ function! ToggleVimReference()
     endif
 endfunction
 
-" map F4 to TlistToggle
-map <F4> :TlistToggle<CR>
-
 " remap for smart buffer delete
 nnoremap <silent> <leader>bd    :Sbd<CR>
 nnoremap <silent> <leader>bdm   :Sbdm<CR>
+
+" map F8 for TagbarToggle
+map <silent> <F4> :TagbarToggle<CR>
+let g:tagbar_width=25
+
+au FileType php set omnifunc=phpcomplete#CompletePHP
+
+" Complete options (disable preview scratch window)
+set completeopt=menu,menuone,longest
+" Limit popup menu height
+set pumheight=15
+
+" SuperTab option for context aware completion
+let g:SuperTabDefaultCompletionType = "context"
+
+" Edit and reload the vimrc file
+nmap <silent> <Leader>ev :e /home/thanatos/.vim/vimrc<CR>
+nmap <silent> <Leader>es :so $MYVIMRC<CR>
